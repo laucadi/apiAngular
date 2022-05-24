@@ -1,0 +1,52 @@
+<div class="fondo">
+    <div class="title">
+        <h1>Crypto Search</h1>
+    </div>
+    <form class="form">
+        <div class="mb-3 row">
+            <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Full text search:</label>
+            <div class="col-xs-3 col-sm-auto">
+                <input class="form-control" type="text" (keyup)="searchCoin()" [(ngModel)]="searchText"
+                    name="searchText">
+            </div>
+        </div>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col" class="subtitles">#</th>
+                <th scope="col" class="subtitles">Name</th>
+                <th scope="col" class="subtitles">Symbol</th>
+                <th scope="col" class="subtitles">$ Current Price</th>
+                <th scope="col" class="subtitles">Price Change % 24H</th>
+                <th scope="col" class="subtitles">Total Volume</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of datosApi; let index = index ">
+                <th scope="row">{{index+1}}</th>
+                <td>
+                    <img [src]="item.image" class="me-2" style="width: 30px">
+                    <ngb-highlight [result]="item.name"> </ngb-highlight>
+                </td>
+                <td>
+                    <ngb-highlight [result]="item.symbol"></ngb-highlight>
+                </td>
+                <td>
+                    <ngb-highlight [result]="item.current_price.toLocaleString() "></ngb-highlight>
+                </td>
+                <td [ngClass]="item.price_change_percentage_24h > 0 ? 'text-success': 'text-danger'">
+                    <ngb-highlight [result]="item.price_change_percentage_24h.toLocaleString()"></ngb-highlight>
+                </td>
+                <td>
+                    <ngb-highlight [result]="item.total_volume.toLocaleString()"></ngb-highlight>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- <pre>
+    {{datosApi |json}}
+</pre> -->

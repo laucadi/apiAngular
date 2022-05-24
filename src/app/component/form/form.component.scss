@@ -1,0 +1,36 @@
+.fondo {
+  margin: 50px;
+  font-family: "Poppins", sans-serif;
+  height: 100vh;
+
+  .title {
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    padding-bottom: 50px;
+    position: relative;
+    &::before {
+      content: url("../../../assets/img/Finance-amico.svg");
+      width: 400px;
+      bottom: -200px;
+      right: 100px;
+      position: absolute;
+      opacity: 0.3;
+    }
+
+    h1 {
+      font-weight: 900;
+      position: relative;
+    }
+  }
+  .subtitles {
+    th {
+      font-weight: 900;
+    }
+  }
+  .form {
+    position: relative;
+  }
+  .table {
+    position: relative;
+  }
+}

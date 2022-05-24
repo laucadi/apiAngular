@@ -1,0 +1,175 @@
+<div class="fondo row">
+    <div class="title">
+        <h1>Cat Breeds</h1>
+
+    </div>
+    <div class="card" *ngFor="let item of datosApi | paginate: {itemsPerPage: 3, currentPage: pages }">
+        <img [src]="item.image.url" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h4 class="card-title">{{item.name}}</h4>
+            <p class="card-text"><span class="subtitle">Origin: </span>{{item.origin}}</p>
+            <p class="card-text"><span class="subtitle">Temperament: </span>{{item.temperament}}</p>
+            <h5>Affection Level: </h5>
+            <ng-template #t let-fill="fill">
+                <span class="star" [class.full]="fill === 100">
+                    <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                </span>
+            </ng-template>
+            <ngb-rating [(rate)]="item.affection_level" [starTemplate]="t" [readonly]="true" [max]="5">
+            </ngb-rating>
+            <h5>Child Friendly: </h5>
+            <ng-template #t let-fill="fill">
+                <span class="star" [class.full]="fill === 100">
+                    <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                </span>
+            </ng-template>
+            <ngb-rating [(rate)]="item.child_friendly" [starTemplate]="t" [readonly]="true" [max]="5">
+            </ngb-rating>
+            <h5>Adaptability: </h5>
+            <ng-template #t let-fill="fill">
+                <span class="star" [class.full]="fill === 100">
+                    <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                </span>
+            </ng-template>
+            <ngb-rating [(rate)]="item.adaptability" [starTemplate]="t" [readonly]="true" [max]="5">
+            </ngb-rating>
+
+        </div>
+        <div class="card-footer row">
+            <div class="col-4 icons"> <a [href]="item.cfa_url" target="_blank" rel="noopener noreferrer"><i
+                        class="fa-solid fa-question"></i></a></div>
+            <div class="col-4 icons"><button type="button" class="btn" (click)="pruebaEvento(item.description)">
+                    <i class="fa-solid fa-cat"></i>
+                </button></div>
+            <div class="col-4 icons"><button type="button" class="btn" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">
+                    <i class="fa-solid fa-paw"></i>
+                </button></div>
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Description</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>Affection Level: </h5>
+                        <ng-template #t let-fill="fill">
+                            <span class="star" [class.full]="fill === 100">
+                                <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                            </span>
+                        </ng-template>
+                        <ngb-rating [(rate)]="item.affection_level" [starTemplate]="t" [readonly]="true" [max]="5">
+                        </ngb-rating>
+                        <h5>Child Friendly: </h5>
+                        <ng-template #t let-fill="fill">
+                            <span class="star" [class.full]="fill === 100">
+                                <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                            </span>
+                        </ng-template>
+                        <ngb-rating [(rate)]="item.child_friendly" [starTemplate]="t" [readonly]="true" [max]="5">
+                        </ngb-rating>
+                        <h5>Adaptability: </h5>
+                        <ng-template #t let-fill="fill">
+                            <span class="star" [class.full]="fill === 100">
+                                <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                            </span>
+                        </ng-template>
+                        <ngb-rating [(rate)]="item.adaptability" [starTemplate]="t" [readonly]="true" [max]="5">
+                        </ngb-rating>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <pagination-controls (pageChange)="pages = $event"></pagination-controls>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!--  -->
+
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Description</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h5>Affection Level: </h5>
+                <ng-template #t let-fill="fill">
+                    <span class="star" [class.full]="fill === 100">
+                        <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                    </span>
+                </ng-template>
+                <ngb-rating [(rate)]="item.affection_level" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                <h5>Child Friendly: </h5>
+                <ng-template #t let-fill="fill">
+                    <span class="star" [class.full]="fill === 100">
+                        <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                    </span>
+                </ng-template>
+                <ngb-rating [(rate)]="item.child_friendly" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                <h5>Adaptability: </h5>
+                <ng-template #t let-fill="fill">
+                    <span class="star" [class.full]="fill === 100">
+                        <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                    </span>
+                </ng-template>
+                <ngb-rating [(rate)]="item.adaptability" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+ -->
+
+
+
+<!--<h5>Affection Level: </h5>
+<ng-template #t let-fill="fill">
+    <span class="star" [class.full]="fill === 100">
+        <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+    </span>
+   </ng-template>
+<ngb-rating [(rate)]="item.affection_level" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+<h5>Child Friendly: </h5>
+<ng-template #t let-fill="fill">
+    <span class="star" [class.full]="fill === 100">
+        <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+    </span>
+</ng-template>
+<ngb-rating [(rate)]="item.child_friendly" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+<h5>Adaptability: </h5>
+<ng-template #t let-fill="fill">
+    <span class="star" [class.full]="fill === 100">
+        <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+    </span>
+</ng-template>
+<ngb-rating [(rate)]="item.adaptability" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating> -->
+
+
+<!-- <pre>
+    {{datosApi |json}}
+</pre> -->
